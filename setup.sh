@@ -44,9 +44,13 @@ echo "Please enter your child theme details:"
 wp scaffold child-theme --prompt
 
 
-# Install the wp-admin package:
-echo "Installing some WP-CLI packages..."
-wp package install wp-cli/admin-command
+# Install the wp-admin package if it isn't already:
+if ! $(wp cli has-command admin); then
+	echo "Installing some WP-CLI packages..."
+	wp package install wp-cli/admin-command
+else
+	echo "Package wp-admin is already installed."
+fi
 
 
 # Let's go!
